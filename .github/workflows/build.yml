@@ -30,7 +30,7 @@ jobs:
         if: steps.upstream.outputs.tag != steps.current.outputs.tag
         uses: docker/login-action@v3
         with:
-          username: ${{ secrets.DOCKER_USERNAME }}
+          username: ${{ vars.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PAT }}
 
       - name: Set up Docker Buildx
@@ -54,7 +54,7 @@ jobs:
         run: |
           echo "${{ steps.upstream.outputs.tag }}" > VERSION
           git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.email "github-actions[bot]@users.reply.github.com"
           git add VERSION
           git commit -m "chore: bump to ${{ steps.upstream.outputs.tag }}"
           git push
